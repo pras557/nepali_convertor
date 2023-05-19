@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/num-to-nep-words@1.0.4/conversion.js"></script>
+  </head>
+  <body>
+    <input type="text" id="first" oninput="convertToNepaliNumber('first');" />
+    <input type="text" id="second" oninput="convertToNepaliNumber('second')" />
+    <input type="text" id="third" oninput="convertToNepaliNumber('third')" />
+    <input type="text" id="forth" oninput="convertToNepaliNumber('forth')" />
+
+    <br />
+    <button onclick="sum()">Sum</button>
+    <br />
+
+    <label for="sum"> Nepali: </label>
+    <input type="text" id="sum" />
+
+    <script>
+      let englishNumbers = {};
+
+      function convertToNepaliNumber(id) {
+        let englishNumber = document.getElementById(id).value;
+        englishNumbers[id] = englishNumber;
+
+        let nepaliNumber = conversion(englishNumber);
+
+        document.getElementById(id).value = nepaliNumber;
+      }
+
+      function conversion(englishNumber) {
+        let nepaliNumber = "";
+        for (let i = 0; i < englishNumber.length; i++) {
+          switch (englishNumber[i]) {
+            case "0":
+              nepaliNumber += "०";
+              break;
+            case "1":
+              nepaliNumber += "१";
+              break;
+            case "2":
+              nepaliNumber += "२";
+              break;
+            case "3":
+              nepaliNumber += "३";
+              break;
+            case "4":
+              nepaliNumber += "४";
+              break;
+            case "5":
+              nepaliNumber += "५";
+              break;
+            case "6":
+              nepaliNumber += "६";
+              break;
+            case "7":
+              nepaliNumber += "७";
+              break;
+            case "8":
+              nepaliNumber += "८";
+              break;
+            case "9":
+              nepaliNumber += "९";
+              break;
+            default:
+              nepaliNumber += englishNumber[i];
+          }
+        }
+        return nepaliNumber;
+      }
+
+      function sum() {
+        let output = document.getElementById("sum");
+
+        console.log(englishNumbers);
+
+        let sum =
+          englishNumbers.first +
+          englishNumbers.second +
+          englishNumbers.third +
+          englishNumbers.forth;
+
+        console.log(sum);
+
+        output.value = mapToWords(parseInt(sum), "np");
+      }
+    </script>
+  </body>
+</html>
